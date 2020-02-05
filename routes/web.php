@@ -15,26 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin_login');
+Route::post('login', 'Auth\LoginController@login');
 
-Route::group(['namespace' => 'Admin'], function(){
+Route::post('logout', 'Auth\LoginController@logout', function(){
+    return abort(404);
+})->name('admin_logout');
 
-    // Authentication Routes...
-    Route::get('admin/login', 'Auth\LoginController@showLoginForm')->name('admin_login');
-    Route::post('admin/login', 'Auth\LoginController@login');
-    //Route::post('admin/login-custom', 'LoginCustomController@credentials')->name('admin_login_custom');
-    
-    Route::post('admin/logout', 'Auth\LoginController@logout', function(){
-    	return abort(404);
-    })->name('admin_logout');
+// User Client/Admin
+Route::resource('user', 'UserController'); 
+Route::resource('task', 'TaskController');
 
-	Route::get('admin/home', 'HomeController@index')->name('admin_home');
-	Route::resource('admin/permission', 'PermissionController');
-	// User Client
-	Route::resource('admin/user', 'UserController'); 
-	// User Admin
-	Route::resource('admin/admin', 'AdminController');
-	Route::resource('admin/task', 'TaskController');
-});
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
