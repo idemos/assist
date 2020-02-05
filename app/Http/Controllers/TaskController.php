@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Task;
+=======
+use App\task;
+>>>>>>> 66d5173b4e5748509443a636b9f8eae48bf476e6
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -15,8 +19,11 @@ class TaskController extends Controller
     public function index()
     {
         //
+<<<<<<< HEAD
         $task = Task::all();
         return view('page.task_index',compact('task'));
+=======
+>>>>>>> 66d5173b4e5748509443a636b9f8eae48bf476e6
     }
 
     /**
@@ -27,7 +34,10 @@ class TaskController extends Controller
     public function create()
     {
         //
+<<<<<<< HEAD
         return view('page.task_create');
+=======
+>>>>>>> 66d5173b4e5748509443a636b9f8eae48bf476e6
     }
 
     /**
@@ -38,6 +48,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         $request->validate([
             'name' => 'required|min:2'
         ]);
@@ -50,6 +61,9 @@ class TaskController extends Controller
         }
 
         return redirect(route($page));
+=======
+        //
+>>>>>>> 66d5173b4e5748509443a636b9f8eae48bf476e6
     }
 
     /**
@@ -58,7 +72,11 @@ class TaskController extends Controller
      * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function show(Task $task)
+=======
+    public function show(task $task)
+>>>>>>> 66d5173b4e5748509443a636b9f8eae48bf476e6
     {
         //
     }
@@ -69,10 +87,16 @@ class TaskController extends Controller
      * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function edit(Task $task)
     {
         //
         return view('page.task_edit',compact('task'));
+=======
+    public function edit(task $task)
+    {
+        //
+>>>>>>> 66d5173b4e5748509443a636b9f8eae48bf476e6
     }
 
     /**
@@ -82,6 +106,7 @@ class TaskController extends Controller
      * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function update(Request $request, Task $task)
     {
          $request->validate([
@@ -91,6 +116,11 @@ class TaskController extends Controller
         Task::update($request->except(['method','csrf']));
         
         return redirect(route('task_index'));
+=======
+    public function update(Request $request, task $task)
+    {
+        //
+>>>>>>> 66d5173b4e5748509443a636b9f8eae48bf476e6
     }
 
     /**
@@ -99,10 +129,16 @@ class TaskController extends Controller
      * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function destroy(Task $task)
     {
         //
         Task::find($task->id)->delete();
         return redirect(route('task_index'));
+=======
+    public function destroy(task $task)
+    {
+        //
+>>>>>>> 66d5173b4e5748509443a636b9f8eae48bf476e6
     }
 }
