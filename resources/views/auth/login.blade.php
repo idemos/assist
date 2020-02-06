@@ -1,14 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<div class="row justify-content-center">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-lg-flex justify-content-center align-self-center">
+                  <img src="{{ asset('img/asso_di_picche.png') }}" class="" style="height: 350px;margin: 0 auto">
+              </div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">{{ __('Login') }}</h1>
+                  </div>
+                  <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -65,9 +74,20 @@
                             </div>
                         </div>
                     </form>
+                  <hr>
+                  <div class="text-center">
+                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                  </div>
+                  <div class="text-center">
+                    <a class="small" href="register.html">Create an Account!</a>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+
+      </div>
+
     </div>
-</div>
 @endsection

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\task;
+use App\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -15,6 +15,8 @@ class TaskController extends Controller
     public function index()
     {
         //
+        $task = Task::all();
+        return view('task_index',compact('task'));
     }
 
     /**
@@ -25,6 +27,7 @@ class TaskController extends Controller
     public function create()
     {
         //
+        return view('page.task_create');
     }
 
     /**
@@ -35,6 +38,18 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:2'
+        ]);
+
+        Task::create($request->except(['method','csrf']));
+        
+        $page = 'task_index';
+        if(!empty($request->addNewOne)){
+            $page = 'task_new';
+        }
+
+        return redirect(route($page));
         //
     }
 
@@ -55,9 +70,10 @@ class TaskController extends Controller
      * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(task $task)
+    public function edit(Task $task)
     {
         //
+        return view('page.task_edit',compact('task'));
     }
 
     /**
@@ -67,9 +83,15 @@ class TaskController extends Controller
      * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, task $task)
+    public function update(Request $request, Task $task)
     {
-        //
+         $request->validate([
+            'name' => 'required|min:2|unique:task'
+        ]);
+
+        Task::update($request->except(['method','csrf']));
+        
+        return redirect(route('task_index'));
     }
 
     /**
@@ -78,8 +100,10 @@ class TaskController extends Controller
      * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(task $task)
+    public function destroy(Task $task)
     {
         //
+        Task::find($task->id)->delete();
+        return redirect(route('task_index'));
     }
 }
