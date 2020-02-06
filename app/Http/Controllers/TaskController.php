@@ -2,27 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Task;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        //
-        $user = User::all();
-
-        if($request->ajax()){
-            return $user;
-        }
-
-
-        return view('page.user_index',compact('user'));
+        $task = Task::all();
+        return view('page.task_index',compact('task'));
     }
 
     /**
@@ -32,8 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
-        return view('page.user_create');
+        return view('page.task_create');
     }
 
     /**
@@ -48,24 +40,23 @@ class UserController extends Controller
             'name' => 'required|min:2'
         ]);
 
-        User::create($request->except(['method','csrf']));
+        Task::create($request->except(['method','csrf']));
         
-        $page = 'user_index';
+        $page = 'task_index';
         if(!empty($request->addNewOne)){
-            $page = 'user_new';
+            $page = 'task_new';
         }
 
         return redirect(route($page));
-        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\user  $user
+     * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show(user $user)
+    public function show(task $task)
     {
         //
     }
@@ -73,43 +64,41 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\user  $user
+     * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Task $task)
     {
-        //
-        return view('page.user_edit',compact('user'));
+        return view('page.task_edit',compact('task'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\user  $user
+     * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Task $task)
     {
-         $request->validate([
-            'name' => 'required|min:2|unique:user'
+        $request->validate([
+            'name' => 'required|min:2|unique:task'
         ]);
 
-        User::update($request->except(['method','csrf']));
+        Task::update($request->except(['method','csrf']));
         
-        return redirect(route('user_index'));
+        return redirect(route('task_index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\user  $user
+     * @param  \App\task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Task $task)
     {
-        //
-        User::find($user->id)->delete();
-        return redirect(route('user_index'));
+        Task::find($task->id)->delete();
+        return redirect(route('task_index'));
     }
 }
