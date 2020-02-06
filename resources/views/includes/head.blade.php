@@ -7,6 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/19.2.5/css/dx.common.css" />
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/19.2.5/css/dx.light.css" />
+<<<<<<< HEAD
+=======
+<script src="https://cdn3.devexpress.com/jslib/19.2.5/js/dx.all.js"></script>
+>>>>>>> 6d607f7dded6dfb3289b81c6ad37ca8d8a8d986c
     <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -19,4 +23,9 @@
 <!-- Custom styles for this template-->
 <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet" />
 
+<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="styles.css" />
+=======
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<script src="index.js"></script>
+>>>>>>> 6d607f7dded6dfb3289b81c6ad37ca8d8a8d986c
