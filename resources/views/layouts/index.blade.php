@@ -6,12 +6,14 @@
 <body id="page-top">
   	<!-- Page Wrapper -->
   	<div id="wrapper">
-		@include('includes/sidebar')
+		@if(auth()->user()->type == 1)
+			@include('includes/sidebar')
+		@endif
 		<div id="content-wrapper" class="d-flex flex-column">
 		    <!-- Main Content -->
 		    <div id="content">
 		    	@include('includes/navbar')
-        		@yield('content')
+				@yield('content')
 		    </div>
 			
 			@include('includes/footer')

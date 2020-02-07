@@ -27,6 +27,7 @@ Route::post('logout', 'Auth\LoginController@logout', function(){
 
 // User Client/Admin
 Route::resource('user', 'UserController');
+Route::resource('workfromhome', 'WorkfromhomeController');
 Route::resource('task', 'TaskController');
 
 

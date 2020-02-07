@@ -37,15 +37,17 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dump dei dati della tabella assistnew.migrations: ~4 rows (circa)
+-- Dump dei dati della tabella assistnew.migrations: ~6 rows (circa)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_resets_table', 1),
 	(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-	(4, '2020_02_05_071356_create_notifications_table', 1);
+	(4, '2020_02_05_071356_create_notifications_table', 1),
+	(5, '2020_02_07_075848_tasks', 2),
+	(6, '2020_02_07_175857_workfromhome', 3);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dump della struttura di tabella assistnew.notifications
@@ -78,6 +80,25 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
+-- Dump della struttura di tabella assistnew.tasks
+CREATE TABLE IF NOT EXISTS `tasks` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `tasks_name_unique` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dump dei dati della tabella assistnew.tasks: ~4 rows (circa)
+/*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
+INSERT INTO `tasks` (`id`, `name`, `created_at`, `updated_at`) VALUES
+	(1, 'Microsoft Office License', '2020-02-07 12:16:34', '2020-02-07 17:38:28'),
+	(2, 'Email Access Granted', '2020-02-07 12:17:38', '2020-02-07 17:38:45'),
+	(3, 'Git Repository Granted', '2020-02-07 12:17:58', '2020-02-07 17:38:59'),
+	(5, 'JiraAccess Granted', '2020-02-07 12:19:36', '2020-02-07 17:39:18');
+/*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
+
 -- Dump della struttura di tabella assistnew.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -91,14 +112,29 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dump dei dati della tabella assistnew.users: ~0 rows (circa)
+-- Dump dei dati della tabella assistnew.users: ~2 rows (circa)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `type`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(3, 'Ciro Giametta', 'cirogiametta@msn.com', NULL, 1, '$2y$10$1RaMTWJ7J7Tphp5H8NB18ei244NyVG91iOIInSdWBfXvh8zND2BbS', NULL, '2020-02-05 12:28:02', '2020-02-05 12:28:02'),
-	(4, 'Ciro Giametta', 'cirogiametta@msn.coma', NULL, 0, 'CVs4tqYWpe0xlqGU', NULL, '2020-02-05 12:38:55', '2020-02-05 12:38:55');
+	(1, 'admin', 'admin@admin.com', NULL, 1, '$2y$10$2SZdEyCrr9NaJUsNGLM8oOGhlQwfknnM.xWK7eUDPknv/sJiYq61m', NULL, '2020-02-07 13:20:42', '2020-02-07 13:20:42'),
+	(3, 'Ciro Giametta', 'cirogiametta@msn.com', NULL, 0, '$2y$10$2SZdEyCrr9NaJUsNGLM8oOGhlQwfknnM.xWK7eUDPknv/sJiYq61m', NULL, '2020-02-05 12:28:02', '2020-02-05 12:28:02');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+-- Dump della struttura di tabella assistnew.workfromhomes
+CREATE TABLE IF NOT EXISTS `workfromhomes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `request_date` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `workfromhome_request_date_unique` (`request_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dump dei dati della tabella assistnew.workfromhomes: ~0 rows (circa)
+/*!40000 ALTER TABLE `workfromhomes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `workfromhomes` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

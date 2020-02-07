@@ -58,8 +58,8 @@
         </a>
         <div id="collapse_3" class="collapse" aria-labelledby="headingTwo">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="buttons.html">List</a>
-            <a class="collapse-item" href="cards.html">Add New</a>
+            <a class="collapse-item" href="{{ route('workfromhome.index')}}">List</a>
+            <a class="collapse-item" href="{{ route('workfromhome.create')}}">Add New</a>
           </div>
         </div>
       </li>
