@@ -12,8 +12,8 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="form-group">
-                        <label for="name" class="text-dark">Title</label>
-                        <input value="{{ old('date') }}" type="date" class="form-control" name="date" id="date" aria-describedby="titleHelp" placeholder="Enter text">
+                        <label for="name" class="text-dark">Insert the date</label>
+                        <input value="{{ old('date') }}" type="date" class="form-control" name="request_date" id="request_date" aria-describedby="request_dateHelp" placeholder="Enter date">
                         <small id="titleHelp" class="form-text text-muted">Write the date </small>
                     </div>
                 </li>

@@ -55,7 +55,7 @@ class UserController extends Controller
         ];
         
         if($request['type'] == 1){
-            $aValidate['password'] = ['required', 'string', 'min:8', 'confirmed'];
+            $aValidate['password'] = 'required|string|min:8|confirmed';
         }
 
         $request->validate($aValidate);
@@ -115,14 +115,21 @@ class UserController extends Controller
         ];
         
         if($request['type'] == 1){
-            $aValidate['password'] = ['required', 'string', 'min:8', 'confirmed'];
+            $aValidate['password'] = 'required|string|min:8|confirmed';
+        }
+
+        if(auth()->user()->type == 0){
+            $request['type'] = 0;
+            $request['password'] = Hash::make($request['password']);
+        } else {
+            $request['password'] = ($request['type'] == '1' ? Hash::make($request['password']) : Str::random(8));
         }
 
         $request->validate($aValidate);
 
         User::find($user->id)->update($request->except(['_token','_method']));
         
-        return redirect(route('user_index'));
+        return redirect(route('user_index'))->with('success','You have successfully updated your datas.');
     }
 
     /**

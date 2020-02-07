@@ -19,7 +19,12 @@ class WorkfromhomeController extends Controller
      */
     public function index(Request $request)
     {
-        $Workfromhome = Workfromhome::all();
+        $user = auth()->user();
+        if($user->type == 1){
+            $Workfromhome = Workfromhome::all();
+        }else{
+            $Workfromhome = Workfromhome::where('user_id',$user->id)->get();
+        }
 
         if($request->ajax()){
             return $Workfromhome;
@@ -49,12 +54,14 @@ class WorkfromhomeController extends Controller
     {
         //
         $request->validate([
-            'request_date' => 'required|date'
+            'request_date' => 'required|date|after:start_date|date_format:"Y-m-d"'
         ]);
 
-        Workfromhome::create(['request_date' => $request->request_date]);
+        $aUser = ['user_id' => auth()->user()->id,'request_date' => $request->request_date];
+
+        Workfromhome::create($aUser);
         
-        return redirect(route('workfrohome.index'));
+        return redirect(route('workfromhome.index'))->with('success','You have successfully insert data.');
 
     }
 

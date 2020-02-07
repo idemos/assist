@@ -13,6 +13,7 @@
 
 
 -- Dump della struttura del database assistnew
+DROP DATABASE IF EXISTS `assistnew`;
 CREATE DATABASE IF NOT EXISTS `assistnew` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `assistnew`;
 

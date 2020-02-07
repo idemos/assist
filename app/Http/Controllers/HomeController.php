@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $page = (auth()->user()->type == 1 ? 'page.home' : 'page.request');
+        $page = (auth()->user()->type == 1 ? 'page.home' : 'page.workfromhome_index');
         return view($page);
     }
 }

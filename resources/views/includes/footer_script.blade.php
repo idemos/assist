@@ -46,4 +46,19 @@ $(document).on('click','.btn-delete',function(event){
 		}
 	});
 });
+
+$(document).on('click', '.logout', function(e){
+    e.preventDefault();
+
+    $.ajax({ 
+        type: "POST", 
+        url: $(this).attr('href'), 
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(result) {
+            top.location.href = '/';
+        }
+    });
+});
 </script>

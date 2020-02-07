@@ -52,7 +52,7 @@ class TaskController extends Controller
             $page = 'task.create';
         }
 
-        return redirect(route($page));
+        return redirect(route($page))->with('success', 'You have successfully created a Task.');
     }
 
     /**
@@ -92,7 +92,7 @@ class TaskController extends Controller
 
         Task::find($task->id)->update($request->except(['_token','_method']));
         
-        return redirect(route('task.index'));
+        return redirect(route('task.index'))->with('success','You have successfully updated your datas.');
     }
 
     /**
