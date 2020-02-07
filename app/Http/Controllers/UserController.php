@@ -44,18 +44,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-            'name' => 'required|min:2'
+            'name' => 'required|string|max:255|min:2',
+            'email' => 'required|string|email|max:100|unique:users',
         ]);
 
-        User::create($request->except(['method','csrf']));
-        
-        $page = 'user_index';
-        if(!empty($request->addNewOne)){
-            $page = 'user_new';
+        if($request['type'] == 1){
+            $aValidate['password'] = ['required', 'string', 'min:8', 'confirmed'];
         }
 
-        return redirect(route($page));
+        User::create($request->except(['_token','_method']));
+        
+        $page = 'user.index';
+        if(!empty($request->addNewOne)){
+            $page = 'user.new';
+        }
+
+        return redirect(route($page))->with('success', 'You have successfully created a User.');
         //
     }
 

@@ -28,7 +28,7 @@
           <i class="fas fa-fw fa-cog"></i>
           <span>Users</span>
         </a>
-        <div id="collapse_1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapse_1" class="collapse" aria-labelledby="headingTwo">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('user.index')}}">List</a>
             <a class="collapse-item" href="{{ route('user.create')}}">Add New</a>
@@ -42,7 +42,7 @@
           <i class="fas fa-fw fa-cog"></i>
           <span>Task</span>
         </a>
-        <div id="collapse_2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapse_2" class="collapse" aria-labelledby="headingTwo">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('task.index')}}">List</a>
             <a class="collapse-item" href="{{ route('task.create')}}">Add New</a>
@@ -56,7 +56,7 @@
           <i class="fas fa-fw fa-cog"></i>
           <span>Permissions</span>
         </a>
-        <div id="collapse_3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapse_3" class="collapse" aria-labelledby="headingTwo">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="buttons.html">List</a>
             <a class="collapse-item" href="cards.html">Add New</a>

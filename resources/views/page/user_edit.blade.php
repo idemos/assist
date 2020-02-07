@@ -3,10 +3,11 @@
 @section('content')
 
     <div class="card-body col-md-12 col-form-label text-md-center">
-        <h5 class="card-title">Create User</h5>
+        <h5 class="card-title">user Edit</h5>
+        <p class="card-text">Created at "<b>{{ $user->created_at->diffForHumans() }}</b>" Updated at "<b>{{$user->updated_at->diffForHumans()}}</b>"</p>
     </div>
     @include('includes.messages')
-    <form method="POST" action="{{ route('user.store') }}">
+    <form method="POST" action="{{ route('user.edit',$user->id) }}">
         @csrf
         @method('PUT')
 

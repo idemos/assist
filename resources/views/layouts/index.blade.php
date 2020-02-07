@@ -19,12 +19,6 @@
     </div>
 
 @include('includes/footer_script')
-<body class="dx-viewport">
-    <div class="demo-container">
-        @yield('content')
-    </div>
-
-@include('includes/footer')
 @yield('footer_script')
 </body>
 </html>

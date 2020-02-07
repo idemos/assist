@@ -60,7 +60,7 @@ $(function(){
                 buttons: [
 					{
 						template: function(element,row){
-							return $('<button id="edit_' + row.data.id + '" type="button" class="btn btn-sm btn-secondary">edit</button>');
+							return $('<button id="edit_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-secondary btn-edit">edit</button>');
 						}
 					}
 				]
@@ -77,4 +77,11 @@ $(function(){
         }
         */
     });
+});
+
+
+$(document).on('click',"#gridContainer_user .btn-edit", function(obj){
+    const url_edit = data.url_edit.replace(':id',$(this).data('id'));
+    document.location.href = url_edit;
+    console.log('data-id',$(this).data('id'));
 });

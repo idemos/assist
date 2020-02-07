@@ -12,8 +12,13 @@
 <script src="{{ asset('js/datagrid.user.js') }}"></script>
 
 <script>
+var data = {
+    url_list: "{{ route('user.index') }}",
+    url_edit: "{{ route('user.edit',':id') }}"
+}
+
 $(function(){
-    $("#gridContainer_user").dxDataGrid('instance').option('dataSource', "{{ route('user.index') }}");
+    $("#gridContainer_user").dxDataGrid('instance').option('dataSource', data.url_list);
 });
 </script>
 @endsection

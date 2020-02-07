@@ -13,3 +13,25 @@
 
 <script src="https://cdn3.devexpress.com/jslib/19.2.5/js/dx.all.js"></script>
 <script src="https://cdn3.devexpress.com/jslib/19.2.5/js/localization/dx.messages.it.js"></script>
+
+<script>
+$(document).on('click','.btn-delete',function(event){
+	event.preventDefault();
+
+	$.ajax({ 
+		type: "delete", 
+		url: $(this).attr('href'), 
+		headers: {
+		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		},
+		success: function(result) {
+			console.log(result);
+			if(result.msg){
+				$(this).parents('tr').hide();
+				location.reload();
+			}
+
+		}
+	});
+});
+</script>
