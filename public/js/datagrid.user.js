@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
 
     $("#gridContainer_user").dxDataGrid({
         allowColumnReordering: true,
@@ -16,27 +16,27 @@ $(function(){
             highlightCaseSensitive: true
         },
         filterRow: {
-            applyFilter:"auto",
-            applyFilterText:"Apply filter",
-            betweenEndText:"End",
-            betweenStartText:"Start",
+            applyFilter: "auto",
+            applyFilterText: "Apply filter",
+            betweenEndText: "End",
+            betweenStartText: "Start",
             operationDescriptions: {
-                between:"Between",
-                contains:"Contains",
-                endsWith:"Ends with",
-                equal:"Equals",
-                greaterThan:"Greater than",
-                greaterThanOrEqual:"Greater than or equal to",
-                lessThan:"Less than",
-                lessThanOrEqual:"Less than or equal to",
-                notContains:"Does not contain",
-                notEqual:"Does not equal",
-                startsWith:"Starts with"
+                between: "Between",
+                contains: "Contains",
+                endsWith: "Ends with",
+                equal: "Equals",
+                greaterThan: "Greater than",
+                greaterThanOrEqual: "Greater than or equal to",
+                lessThan: "Less than",
+                lessThanOrEqual: "Less than or equal to",
+                notContains: "Does not contain",
+                notEqual: "Does not equal",
+                startsWith: "Starts with"
             },
-            resetOperationText:"Reset",
-            showAllText:"",
-            showOperationChooser:true,
-            visible:true
+            resetOperationText: "Reset",
+            showAllText: "",
+            showOperationChooser: true,
+            visible: true
         },
         columns: [
             {
@@ -56,14 +56,14 @@ $(function(){
                 dataType: "date"
             },
             {
-				type: "buttons",
+                type: "buttons",
                 buttons: [
-					{
-						template: function(element,row){
-							return $('<button id="edit_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-secondary btn-edit">edit</button>');
-						}
-					}
-				]
+                    {
+                        template: function (element, row) {
+                            return $('<button id="edit_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-secondary btn-edit">edit</button> <button id="delete_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-danger btn-delete">delete</button>');
+                        }
+                    }
+                ]
             }
 
         ],
@@ -79,9 +79,8 @@ $(function(){
     });
 });
 
-
-$(document).on('click',"#gridContainer_user .btn-edit", function(obj){
-    const url_edit = data.url_edit.replace(':id',$(this).data('id'));
+$(document).on('click', "#gridContainer_user .btn-edit", function (obj) {
+    const url_edit = data.url_edit.replace(':id', $(this).data('id'));
     document.location.href = url_edit;
-    console.log('data-id',$(this).data('id'));
+    console.log('data-id', $(this).data('id'));
 });

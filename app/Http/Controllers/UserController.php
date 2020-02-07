@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,13 +16,11 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        //
         $user = User::all();
 
         if($request->ajax()){
             return $user;
         }
-
 
         return view('page.user_index',compact('user'));
     }
@@ -44,23 +44,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate([
+        $aValidate = [
             'name' => 'required|string|max:255|min:2',
             'email' => 'required|string|email|max:100|unique:users',
-        ]);
-
+        ];
+        
         if($request['type'] == 1){
             $aValidate['password'] = ['required', 'string', 'min:8', 'confirmed'];
         }
 
-        User::create($request->except(['_token','_method']));
+        $request->validate($aValidate);
+
+        $request['password'] = ($request['type'] == '1' ? Hash::make($request['password']) : Str::random(8));
+        
+        $user = User::create($request->except(['_token','_method']));
         
         $page = 'user.index';
         if(!empty($request->addNewOne)){
             $page = 'user.new';
         }
-
+/*
+        if(!empty($request['type'])){
+            $user->notify(new UserCreatedNotification());
+        }
+*/
         return redirect(route($page))->with('success', 'You have successfully created a User.');
         //
     }
@@ -85,7 +92,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
-        return view('page.user_edit',compact('user'));
+        return view('page.user_edit', compact('user'));
     }
 
     /**
@@ -97,11 +104,18 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-         $request->validate([
-            'name' => 'required|min:2|unique:user'
-        ]);
+        $aValidate = [
+            'name' => 'required|string|max:255|min:2',
+            'email' => 'required|string|email|max:100|unique:users',
+        ];
+        
+        if($request['type'] == 1){
+            $aValidate['password'] = ['required', 'string', 'min:8', 'confirmed'];
+        }
 
-        User::update($request->except(['method','csrf']));
+        $request->validate($aValidate);
+
+        User::find($user->id)->update($request->except(['_token','_method']));
         
         return redirect(route('user_index'));
     }
@@ -116,6 +130,6 @@ class UserController extends Controller
     {
         //
         User::find($user->id)->delete();
-        return redirect(route('user_index'));
+        //return redirect(route('user_index'));
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.app')
 
 @section('content')
 <div class="row justify-content-center">
@@ -14,9 +14,11 @@
               </div>
               <div class="col-lg-6">
                 <div class="p-5">
+                  <hr>
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">{{ __('Login') }}</h1>
                   </div>
+                  <hr>
                   <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -47,19 +49,21 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="form-group row">
+                        
+                        {{-- 
+                          <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                      <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
-                                    </label>
+                                    </label> 
+                                  </div>
                                 </div>
-                            </div>
-                        </div>
-
+                              </div>
+                              --}}
+                              
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -75,12 +79,6 @@
                         </div>
                     </form>
                   <hr>
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                  </div>
-                  <div class="text-center">
-                    <a class="small" href="register.html">Create an Account!</a>
-                  </div>
                 </div>
               </div>
             </div>

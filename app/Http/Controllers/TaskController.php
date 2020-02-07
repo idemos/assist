@@ -12,9 +12,14 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $task = Task::all();
+
+        if($request->ajax()){
+            return $task;
+        }
+
         return view('page.task_index',compact('task'));
     }
 
@@ -37,14 +42,14 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:2'
+            'name' => 'string|required|min:2|unique:tasks'
         ]);
 
-        Task::create($request->except(['method','csrf']));
+        Task::create($request->except(['_token','_method']));
         
-        $page = 'task_index';
+        $page = 'task.index';
         if(!empty($request->addNewOne)){
-            $page = 'task_new';
+            $page = 'task.create';
         }
 
         return redirect(route($page));
@@ -82,12 +87,12 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $request->validate([
-            'name' => 'required|min:2|unique:task'
+            'name' => 'required|min:2|unique:tasks'
         ]);
 
-        Task::update($request->except(['method','csrf']));
+        Task::find($task->id)->update($request->except(['_token','_method']));
         
-        return redirect(route('task_index'));
+        return redirect(route('task.index'));
     }
 
     /**
@@ -99,6 +104,6 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         Task::find($task->id)->delete();
-        return redirect(route('task_index'));
+        //return redirect(route('task_index'));
     }
 }

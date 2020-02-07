@@ -14,23 +14,35 @@
 <script src="https://cdn3.devexpress.com/jslib/19.2.5/js/dx.all.js"></script>
 <script src="https://cdn3.devexpress.com/jslib/19.2.5/js/localization/dx.messages.it.js"></script>
 
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
 <script>
 $(document).on('click','.btn-delete',function(event){
 	event.preventDefault();
+	
+	var url_delete = data.url_delete.replace(':id', $(this).data('id'));
+	var csrf = $('meta[name="csrf-token"]').attr('content');
 
+	console.log(csrf);
+	
 	$.ajax({ 
-		type: "delete", 
-		url: $(this).attr('href'), 
+		type: "DELETE", 
+		url: url_delete, 
 		headers: {
 		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
 		success: function(result) {
 			console.log(result);
+			location.reload();
+			/*
 			if(result.msg){
 				$(this).parents('tr').hide();
 				location.reload();
 			}
-
+			*/
 		}
 	});
 });

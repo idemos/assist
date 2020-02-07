@@ -6,9 +6,8 @@
         <h5 class="card-title">Create User</h5>
     </div>
     @include('includes.messages')
-    <form method="POST" action="{{ route('user.store') }}">
-        @csrf
-        @method('PUT')
+    <form name="user-task" method="POST" action="{{ route('user.store') }}">
+    @csrf
 
         <div class="form-group row">
             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>

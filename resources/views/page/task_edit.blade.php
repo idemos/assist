@@ -1,4 +1,4 @@
-@extends('layout.index')
+@extends('layouts.index')
 
 @section('content')
 
@@ -7,7 +7,7 @@
         <h5 class="card-title">task Edit</h5>
         <p class="card-text">Created at "<b>{{ $task->created_at->diffForHumans() }}</b>" Updated at "<b>{{$task->updated_at->diffForHumans()}}</b>"</p>
     </div>
-    @include('include.messages')
+    @include('includes.messages')
   <form name="form-task" id="form-task" action="{{ route('task.update', $task->id) }}" method="post">
   @csrf
   @method('PUT')

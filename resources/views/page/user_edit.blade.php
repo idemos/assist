@@ -1,7 +1,8 @@
 @extends('layouts.index')
 
 @section('content')
-
+<div class="row justify-content-center">
+    <div class="col-md-10">
     <div class="card-body col-md-12 col-form-label text-md-center">
         <h5 class="card-title">user Edit</h5>
         <p class="card-text">Created at "<b>{{ $user->created_at->diffForHumans() }}</b>" Updated at "<b>{{$user->updated_at->diffForHumans()}}</b>"</p>
@@ -15,7 +16,7 @@
             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
             <div class="col-md-6">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ? old('name') : $user->name }}" required autocomplete="name" autofocus>
 
                 @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -29,7 +30,7 @@
             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
             <div class="col-md-6">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ? old('email') : $user->email }}" required autocomplete="email">
 
                 @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -42,12 +43,12 @@
             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Type User') }}</label>
             <div class="col-md-6">
                 <select name="type" id="type" class="form-control">
-                    <option value="0">Employee</option>
-                    <option value="1">Admin</option>
+                    <option value="0" {{ $user->type == 0 ? 'checked' : '' }}>Employee</option>
+                    <option value="1" {{ $user->type == 1 ? 'checked' : '' }}>Admin</option>
                 </select>
             </div>
         </div>
-        <div id="password_content" style="display:none">
+        <div id="password_content" {{ $user->type == 0 ? 'style="display:none"' : '' }}>
             <div class="form-group row">
                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -75,9 +76,10 @@
             <button type="submit" class="btn btn-info">Save</button>
             <button type="reset" class="btn btn-secondary">Reset</button>
             <a class="btn btn-warning" href="{{ route('user.index') }}">Back</a>
-        </div>
-
+        </div>       
     </form>
+</div>
+</div>
 
 @endsection
 

@@ -24,7 +24,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">
+        <a class="nav-link collapsed" href="#collapse_1" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">
           <i class="fas fa-fw fa-cog"></i>
           <span>Users</span>
         </a>
@@ -38,7 +38,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" aria-controls="collapse_2">
+        <a class="nav-link collapsed" href="#collapse_2" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" aria-controls="collapse_2">
           <i class="fas fa-fw fa-cog"></i>
           <span>Task</span>
         </a>
