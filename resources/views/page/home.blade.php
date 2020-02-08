@@ -5,16 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header text-white strong bg-success">Dashboard</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    @auth
+                        Hello <b>{{ strtoupper(auth()->user()->name) }}</b><br>
+                        You are logged in as <b>{{ auth()->user()->type == 1 ? 'admin' : 'user'}}</b>!<br>
+                        Account created at {{ auth()->user()->created_at->diffForHumans() }}<br>
+                    @endauth
 
-                    You are logged in!
                 </div>
             </div>
         </div>

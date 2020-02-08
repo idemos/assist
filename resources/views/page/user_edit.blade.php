@@ -8,7 +8,7 @@
         <p class="card-text">Created at "<b>{{ $user->created_at->diffForHumans() }}</b>" Updated at "<b>{{$user->updated_at->diffForHumans()}}</b>"</p>
     </div>
     @include('includes.messages')
-    <form method="POST" action="{{ route('user.edit',$user->id) }}">
+    <form name="form-user" id="form-user" method="post" action="{{ route('user.update',$user->id) }}">
         @csrf
         @method('PUT')
 
@@ -39,6 +39,7 @@
                 @enderror
             </div>
         </div>
+        @if(auth()->user()->type == 1)
         <div class="form-group row">
             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Type User') }}</label>
             <div class="col-md-6">
@@ -48,6 +49,7 @@
                 </select>
             </div>
         </div>
+        @endif
         <div id="password_content" {{ $user->type == 0 ? 'style="display:none"' : '' }}>
             <div class="form-group row">
                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

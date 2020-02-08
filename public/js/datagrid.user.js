@@ -49,7 +49,13 @@ $(function () {
             },
             {
                 dataField: "type",
-                dataType: "string"
+                dataType: "string",
+                cellTemplate: function (container, options) {
+
+                    $("<div>")
+                        .append(options.value == 1 ? 'admin' : 'user')
+                        .appendTo(container);
+                }
             },
             {
                 dataField: "created_at",
@@ -60,7 +66,7 @@ $(function () {
                 buttons: [
                     {
                         template: function (element, row) {
-                            return $('<button id="edit_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-secondary btn-edit">edit</button> <button id="delete_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-danger btn-delete">delete</button>');
+                            return $('<button id="edit_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-secondary btn-edit">edit</button> <button id="delete_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-danger btn-delete">delete</button> <button id="task_sync_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-success btn-task-sync">tasks</button>');
                         }
                     }
                 ]
@@ -84,3 +90,11 @@ $(document).on('click', "#gridContainer_user .btn-edit", function (obj) {
     document.location.href = url_edit;
     console.log('data-id', $(this).data('id'));
 });
+
+$(document).on('click', ".btn-task-sync", function (obj) {
+    const url_task_sync = data.url_task_sync.replace(':id', $(this).data('id'));
+    document.location.href = url_task_sync;
+    console.log('url_task_sync-id', url_task_sync);
+});
+
+

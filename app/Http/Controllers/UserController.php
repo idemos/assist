@@ -50,7 +50,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $aValidate = [
-            'name' => 'required|string|max:255|min:2',
+            'name' => 'required|string|max:255|min:4',
             'email' => 'required|string|email|max:100|unique:users',
         ];
         
@@ -109,18 +109,22 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $aValidate = [
-            'name' => 'required|string|max:255|min:2',
-            'email' => 'required|string|email|max:100|unique:users',
-        ];
+        $user = auth()->user();
         
+        $aValidate = [
+            'name' => 'required|string|max:255|min:4',
+            'email' => 'required|string|email|max:100|unique:users,email,'.$user->id.',id',
+        ];
+
         if($request['type'] == 1){
             $aValidate['password'] = 'required|string|min:8|confirmed';
         }
 
-        if(auth()->user()->type == 0){
+        $page_route = route('user.index');
+        if($user->type == 0){
             $request['type'] = 0;
             $request['password'] = Hash::make($request['password']);
+            $page_route = route('user.edit', $user->id);
         } else {
             $request['password'] = ($request['type'] == '1' ? Hash::make($request['password']) : Str::random(8));
         }
@@ -129,7 +133,7 @@ class UserController extends Controller
 
         User::find($user->id)->update($request->except(['_token','_method']));
         
-        return redirect(route('user_index'))->with('success','You have successfully updated your datas.');
+        return redirect($page_route)->with('success','You have successfully updated your datas.');
     }
 
     /**

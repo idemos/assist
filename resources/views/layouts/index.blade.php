@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 @include('includes/head')
+@yield('head_script')
 </head>
 <body id="page-top">
   	<!-- Page Wrapper -->

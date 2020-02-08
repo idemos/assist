@@ -13,15 +13,29 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('users'))
+        {
+            Schema::create('users', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('name');
+                $table->string('email')->unique();
+                $table->tinyInteger('type')->default(0);
+                $table->timestamp('email_verified_at')->nullable();
+                $table->string('password');
+                $table->rememberToken();
+                $table->timestamps();
+            });
+        }
+
+        if (!Schema::hasTable('users_task'))
+        {
+            Schema::create('users_task', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->bigInteger('user_id')->unsigned();
+                $table->bigInteger('task_id')->unsigned();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

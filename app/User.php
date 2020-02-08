@@ -37,8 +37,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+/*
     public function tasks(){
         return $this->belongsToMany(Task::class);
+    }
+*/
+    /**
+     * Workfromhome has many Users.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function workfromhomes()
+    {
+        // hasMany(RelatedModel, foreignKeyOnRelatedModel = workfromhome_id, localKey = id)
+        return $this->hasMany(Workfromhome::class);
+    }
+
+    /**
+     * User belongs to .
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class,'users_task');
     }
 }

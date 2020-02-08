@@ -17,7 +17,8 @@
 var data = {
     url_list: "{{ route('user.index') }}",
     url_edit: "{{ route('user.edit',':id') }}",
-    url_delete: "{{ route('user.destroy',':id') }}"
+    url_delete: "{{ route('user.destroy',':id') }}",
+    url_task_sync: "{{ route('user_task',':id') }}",
 }
 
 $(function(){

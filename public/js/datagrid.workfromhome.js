@@ -40,6 +40,11 @@ $(function(){
         },
         columns: [
             {
+                caption: "user",
+                dataField: "user[name]",
+                dataType: "string"
+            },
+            {
                 dataField: "request_date",
                 dataType: "date"
             },

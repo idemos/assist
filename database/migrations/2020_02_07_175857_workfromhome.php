@@ -13,12 +13,15 @@ class Workfromhome extends Migration
      */
     public function up()
     {
-        Schema::create('workfromhome', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
-            $table->date('request_date')->unique();
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('tasks'))
+        {
+            Schema::create('tasks', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->bigInteger('user_id')->unsigned();
+                $table->date('request_date')->unique();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

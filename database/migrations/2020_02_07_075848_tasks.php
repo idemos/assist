@@ -13,11 +13,14 @@ class Tasks extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->unique();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('tasks'))
+        {
+            Schema::create('tasks', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('name')->unique();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

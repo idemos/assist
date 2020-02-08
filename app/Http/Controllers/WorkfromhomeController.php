@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Workfromhome;
 use Illuminate\Http\Request;
 
@@ -21,9 +22,9 @@ class WorkfromhomeController extends Controller
     {
         $user = auth()->user();
         if($user->type == 1){
-            $Workfromhome = Workfromhome::all();
+            $Workfromhome = Workfromhome::with('user')->get();
         }else{
-            $Workfromhome = Workfromhome::where('user_id',$user->id)->get();
+            $Workfromhome = Workfromhome::with('user')->where('user_id', $user->id)->get();
         }
 
         if($request->ajax()){
@@ -41,7 +42,8 @@ class WorkfromhomeController extends Controller
      */
     public function create()
     {
-        return view('page.workfromhome_create');
+        $users = User::all();
+        return view('page.workfromhome_create', compact('users'));
     }
 
     /**
