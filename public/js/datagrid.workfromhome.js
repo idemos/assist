@@ -57,7 +57,17 @@ $(function(){
                 buttons: [
 					{
 						template: function(element,row){
-                            return $('<button id="delete_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-danger btn-delete">delete</button>');
+                            console.log(row.data.status);
+                            btn = '<button id="delete_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-danger btn-delete">delete</button>';
+                            
+                            if(row.data.status == 0){
+                                btn+= ' <button id="pending_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-warning btn-pending">pending</button>';
+                            }else if(row.data.status == 1){
+                                btn+= ' <button id="accepted_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-success">success</button>';
+                            }else if(row.data.status == 2){
+                                btn+= ' <button id="refused_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-info">refused</button>';
+                            }
+                            return $(btn);
 						}
 					}
 				]

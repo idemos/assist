@@ -6,6 +6,7 @@
         <div class="card-body col-md-12 col-form-label text-md-center">
             <h5 class="card-title">Request work-from-home Create</h5>
             <span id="clock"></span>
+            <span id="deadline">End working day hour: 16:00</span>
         </div>
         @include('includes.messages')
         <form name="form-workfromhome" id="form-workfromhome" action="{{ route('workfromhome.store') }}" method="post">
@@ -51,17 +52,17 @@
         {
             setInterval(function() {
                 var today = new Date();
-                var month = today.getMonth();
-                var day = today.getDay();
+                var month = today.getMonth() + 1;
+                var day = today.getDate();
+                console.log('day',day);
                 var year = today.getFullYear();
 
                 var hour = today.getHours() > 12 ? today.getHours() - 12 : today.getHours();
                 var minute = today.getMinutes();
                 var seconds = today.getSeconds();
-                var milliseconds = today.getMilliseconds();
+                //var milliseconds = today.getMilliseconds();
 
-                var output = month + '/' + day + '/' + year + ' - ' +
-                hour + ':' + minute + ':' + seconds + ':' + milliseconds;
+                var output = year + '/' + month + '/' + day + ' - ' + hour + ':' + minute + ':' + seconds;
 
                 $('#clock').html(output);
 
