@@ -19,6 +19,7 @@ class Workfromhome extends Migration
                 $table->bigIncrements('id');
                 $table->bigInteger('user_id')->unsigned();
                 $table->date('request_date')->unique();
+                $table->tinyInteger('status')->default(0);
                 $table->timestamps();
             });
         }
