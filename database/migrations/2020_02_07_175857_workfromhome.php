@@ -13,9 +13,9 @@ class Workfromhome extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('tasks'))
+        if(!Schema::hasTable('workfromhome'))
         {
-            Schema::create('tasks', function (Blueprint $table) {
+            Schema::create('workfromhome', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->bigInteger('user_id')->unsigned();
                 $table->date('request_date')->unique();

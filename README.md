@@ -9,3 +9,4 @@ Operativing Steps:
 - php artisan serve
 - go to browser and write localhost:8000 (http://localhost:8000).
 - for testing email i used mailto.io
+- chmod 777 /var/www/html/assist/storage/
