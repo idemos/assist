@@ -65,7 +65,7 @@ $(function(){
                             }else if(row.data.status == 1){
                                 btn+= ' <button id="accepted_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-success">success</button>';
                             }else if(row.data.status == 2){
-                                btn+= ' <button id="refused_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-info">refused</button>';
+                                btn+= ' <button id="refused_' + row.data.id + '" type="button" data-id="' + row.data.id + '" class="btn btn-sm btn-danger">refused</button>';
                             }
                             return $(btn);
 						}

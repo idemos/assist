@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Workfromhome extends Model
 {
     //
-    protected $fillable = ['user_id','request_date','done'];
+    protected $fillable = ['user_id','request_date','status'];
 
 	/**
 	 * Workfromhome belongs to User.

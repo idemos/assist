@@ -22,7 +22,7 @@
     <script>
     var data = {
         url_list: "{{ route('workfromhome.index') }}",
-        url_update: "{{ route('workfromhome_update', ':id') }}",
+        url_update: "{{ route('workfromhome_update') }}",
         url_delete: "{{ route('workfromhome.destroy',':id') }}"
     }
 
@@ -73,11 +73,12 @@
                 };
 
                 var url_update = data.url_update;
-                var url_update = url_update.replace(':id', id);
+                //var url_update = url_update.replace(':id', id);
                 
                 $.ajax({ 
-                    type: "POST", 
+                    type: "get", 
                     url: url_update, 
+                    cache: false,
                     data: (datas),
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

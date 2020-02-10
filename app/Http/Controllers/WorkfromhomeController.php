@@ -121,21 +121,6 @@ class WorkfromhomeController extends Controller
      */
     public function update(Request $request)
     {
-            dd($request->id);
-        $user = @auth()->user();
-        /*
-        $request->validate([
-            'status' => 'required|min:0',
-            'id' => 'required|min:1',
-        ]);
-*/
-        
-
-        //if($user->type === 1){
-
-
-            Workfromhome::find($request->id)->update(['status' => $request->status]);
-        //}
 
     }
 

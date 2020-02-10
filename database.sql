@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              5.7.29 - MySQL Community Server (GPL)
--- S.O. server:                  Linux
--- HeidiSQL Versione:            10.2.0.5599
+-- Versione server:              5.6.16-1~exp1 - (Ubuntu)
+-- S.O. server:                  debian-linux-gnu
+-- HeidiSQL Versione:            9.5.0.5196
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -13,7 +13,6 @@
 
 
 -- Dump della struttura del database assistnew
-DROP DATABASE IF EXISTS `assistnew`;
 CREATE DATABASE IF NOT EXISTS `assistnew` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `assistnew`;
 
@@ -38,24 +37,24 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dump dei dati della tabella assistnew.migrations: ~6 rows (circa)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_resets_table', 1),
 	(3, '2019_08_19_000000_create_failed_jobs_table', 1),
 	(4, '2020_02_05_071356_create_notifications_table', 1),
-	(5, '2020_02_07_075848_tasks', 2),
-	(6, '2020_02_07_175857_workfromhome', 3);
+	(5, '2020_02_07_075848_tasks', 1),
+	(6, '2020_02_07_175857_workfromhome', 1),
+	(7, '2014_10_12_000000_create_users_table', 2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dump della struttura di tabella assistnew.notifications
 CREATE TABLE IF NOT EXISTS `notifications` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notifiable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notifiable_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `notifiable_id` bigint(20) unsigned NOT NULL,
   `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `read_at` timestamp NULL DEFAULT NULL,
@@ -71,8 +70,8 @@ CREATE TABLE IF NOT EXISTS `notifications` (
 
 -- Dump della struttura di tabella assistnew.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -84,14 +83,14 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 -- Dump della struttura di tabella assistnew.tasks
 CREATE TABLE IF NOT EXISTS `tasks` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tasks_name_unique` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dump dei dati della tabella assistnew.tasks: ~4 rows (circa)
+-- Dump dei dati della tabella assistnew.tasks: ~3 rows (circa)
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
 INSERT INTO `tasks` (`id`, `name`, `created_at`, `updated_at`) VALUES
 	(1, 'Microsoft Office License', '2020-02-07 12:16:34', '2020-02-07 17:38:28'),
@@ -103,38 +102,60 @@ INSERT INTO `tasks` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- Dump della struttura di tabella assistnew.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `type` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` tinyint(3) unsigned DEFAULT '0',
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `users_email_unique` (`email`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dump dei dati della tabella assistnew.users: ~2 rows (circa)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `type`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(1, 'admin', 'admin@admin.com', NULL, 1, '$2y$10$2SZdEyCrr9NaJUsNGLM8oOGhlQwfknnM.xWK7eUDPknv/sJiYq61m', NULL, '2020-02-07 13:20:42', '2020-02-07 13:20:42'),
-	(3, 'Ciro Giametta', 'cirogiametta@msn.com', NULL, 0, '$2y$10$2SZdEyCrr9NaJUsNGLM8oOGhlQwfknnM.xWK7eUDPknv/sJiYq61m', NULL, '2020-02-05 12:28:02', '2020-02-05 12:28:02');
+	(2, 'Ciro Giametta', 'cirogiametta@msn.com', NULL, 0, '$2y$10$2SZdEyCrr9NaJUsNGLM8oOGhlQwfknnM.xWK7eUDPknv/sJiYq61m', NULL, '2020-02-05 12:28:02', '2020-02-08 07:27:29');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+-- Dump della struttura di tabella assistnew.users_task
+CREATE TABLE IF NOT EXISTS `users_task` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `task_id` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id_task_id` (`user_id`,`task_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dump dei dati della tabella assistnew.users_task: ~2 rows (circa)
+/*!40000 ALTER TABLE `users_task` DISABLE KEYS */;
+INSERT INTO `users_task` (`id`, `user_id`, `task_id`, `created_at`, `updated_at`) VALUES
+	(2, 2, 5, NULL, NULL),
+	(4, 2, 3, NULL, NULL);
+/*!40000 ALTER TABLE `users_task` ENABLE KEYS */;
 
 -- Dump della struttura di tabella assistnew.workfromhomes
 CREATE TABLE IF NOT EXISTS `workfromhomes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL,
   `request_date` date NOT NULL,
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `workfromhome_request_date_unique` (`request_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `workfromhome_request_date_unique` (`request_date`,`user_id`,`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dump dei dati della tabella assistnew.workfromhomes: ~0 rows (circa)
+-- Dump dei dati della tabella assistnew.workfromhomes: ~3 rows (circa)
 /*!40000 ALTER TABLE `workfromhomes` DISABLE KEYS */;
+INSERT INTO `workfromhomes` (`id`, `user_id`, `request_date`, `status`, `created_at`, `updated_at`) VALUES
+	(4, 2, '2020-02-08', 1, '2020-02-07 21:58:56', '2020-02-10 05:40:52');
 /*!40000 ALTER TABLE `workfromhomes` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

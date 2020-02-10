@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\WorkfromhomeRequestNotification;
 use App\Task;
 use App\User;
+use App\Workfromhome;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,6 +29,34 @@ class HomeController extends Controller
         $user = User::find($request->user_id);
 
         return view('page.user_task',compact('user_tasks','tasks','user'));
+
+    }
+
+    public function workfromhomeResponse(Request $request)
+    {
+
+        $user = auth()->user();
+
+
+        $request->validate([
+            'status' => 'required|min:0',
+            'id' => 'required|min:1',
+        ]);
+
+        //die('aaaa');
+        
+
+        if($user->type === 1){
+
+            $return = Workfromhome::find($request->id)->update(['status' => $request->status]);
+            $return = Workfromhome::find($request->id)->first();
+            //dd($return);
+
+            User::find($return->user_id)->notify(new WorkfromhomeRequestNotification($return));
+
+            return 'ok';
+            //die($request->status);
+        }
 
     }
 
